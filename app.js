@@ -31,4 +31,9 @@ app.use((req, res, next) => {
 app.use('/api/eleve', eleveRoutes)
 app.use('/api/auth', userRoutes)
 
+app.get('/', (req, res) => {
+  res.send('Backend en ligne');
+});
+
+
 module.exports = app
