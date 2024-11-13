@@ -7,7 +7,7 @@ const userRoutes = require('./routes/userRoutes')
 const path = require('path')
 
 const app = express()
-
+console.log("Server Origin:", process.env.SERVER_ORIGIN);
 mongoose
   .connect(process.env.MONGO_URI)
   .then(() => console.log('Connexion à MongoDB réussie !'))
@@ -16,7 +16,7 @@ mongoose
 app.use(express.json())
 
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', '*')
+  res.setHeader('Access-Control-Allow-Origin', process.env.SERVER_ORIGIN )
   res.setHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content, Accept, Content-Type, Authorization'
@@ -30,10 +30,6 @@ app.use((req, res, next) => {
 
 app.use('/api/eleve', eleveRoutes)
 app.use('/api/auth', userRoutes)
-
-app.get('/', (req, res) => {
-  res.send('Backend en ligne');
-});
 
 
 module.exports = app

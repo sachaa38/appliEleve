@@ -39,7 +39,10 @@ const errorHandler = (error) => {
 
 app.use(
   cors({
-    origin: process.env.SERVER_ORIGIN, // Autoriser ce domaine
+    origin: process.env.SERVER_ORIGIN || 'https://gregarious-sprite-94ae9e.netlify.app',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+    credentials: true,
   })
 )
 
